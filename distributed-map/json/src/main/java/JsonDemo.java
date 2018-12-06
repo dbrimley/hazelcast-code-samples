@@ -47,12 +47,15 @@ public class JsonDemo {
 
     private void basicMapInteraction() {
         // basic map interaction
+        map.put(1, Json.asJson(jsonJohn));
+        // value will cause the j.asObject().set() call below to fail as it returns a different JsonObject
         map.put(1, Json.value(jsonJohn));
-        map.put(2, Json.value(jsonString));
+        map.put(2, Json.asJson(jsonString));
+
         JsonValue j = map.get(1);
         j.asObject().set("age", 5);
         map.put(1, j);
-        inverseMap.put(Json.value(jsonJohn), 2);
+        inverseMap.put(Json.asJson(jsonJohn), 2);
     }
 
     private void connectToCluster() {
